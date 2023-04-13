@@ -35,6 +35,12 @@ class Game(BaseModel):
         orm_mode = True
 
 
+class GameEdit(BaseModel):
+    stage_number: int
+    despcription: Optional[str] = None
+    ending_date: Optional[date] = None
+
+
 class MainResponse(BaseModel):
     user: UserInfo
     game: Game

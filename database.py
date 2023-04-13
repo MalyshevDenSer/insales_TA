@@ -1,12 +1,12 @@
 from sqlalchemy import create_engine
 from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy.orm import sessionmaker
+from settings import SQL_ECHO, POSTGRES_DB_URL
 
-# SQLALCHEMY_DATABASE_URL = "sqlite:///./sql_app.db"
-SQLALCHEMY_DATABASE_URL = "postgresql://localhost:5432/in_sales"
+SQLALCHEMY_DATABASE_URL = POSTGRES_DB_URL
 
 engine = create_engine(
-    SQLALCHEMY_DATABASE_URL, echo=True
+    SQLALCHEMY_DATABASE_URL, echo=SQL_ECHO
 )
 SessionLocal = sessionmaker(autocommit=False, autoflush=False, bind=engine)
 

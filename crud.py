@@ -16,6 +16,15 @@ def get_user_by_id(db: Session, user_id: int):
     return db.query(models.User).filter(models.User.id == user_id).first()
 
 
+def edit_user(db: Session, user: UserEdit):
+    updated_info = vars(user).items()
+    for key, value in updated_info:
+        if value is not None and key != 'id':
+            db.query(models.User).filter(models.User.id == user.id).update({key: value})
+    db.commit()
+    return user
+
+
 def update_game_db_cache(game, db: Session):
     db_game = db.query(models.Game).filter(models.Game.stage_number == game.stage_number).first()
     if db_game:
@@ -27,14 +36,6 @@ def update_game_db_cache(game, db: Session):
         caching.update_cache(db)
     return db_game
 
-
-def edit_user(db: Session, user: UserEdit):
-    updated_info = user.__dict__.items()
-    for key, value in updated_info:
-        if value is not None and key != 'id':
-            db.query(models.User).filter(models.User.id == user.id).update({key: value})
-    db.commit()
-    return
 
 
 def create_user(db: Session, user: BaseUser):

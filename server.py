@@ -50,6 +50,14 @@ def edit_user(user: schemas.UserEdit, db: Session = Depends(get_db)):
     return db_user
 
 
+@app.post("/update_game", response_model=schemas.Game)
+def update_game(game: schemas.Game, db: Session = Depends(get_db)):
+    db_game = crud.update_game_db_cache(game, db)
+    if not db_game:
+        raise HTTPException(status_code=400, detail=f"There is no game with stage_number={game.stage_number}")
+    return db_game
+
+
 @app.post("/add_user", response_model=schemas.UserInfo)
 def add_user(user: schemas.BaseUser, db: Session = Depends(get_db)):
     db_user = crud.get_user_by_name(db, name=user.name)
@@ -57,10 +65,3 @@ def add_user(user: schemas.BaseUser, db: Session = Depends(get_db)):
         raise HTTPException(status_code=400, detail="Name already registered")
     return crud.create_user(db=db, user=user)
 
-
-@app.post("/update_game", response_model=schemas.Game)
-def update_game(game: schemas.Game, db: Session = Depends(get_db)):
-    db_game = crud.update_game_db_cache(game, db)
-    if not db_game:
-        raise HTTPException(status_code=400, detail=f"There is no game with stage_number={game.stage_number}")
-    return db_game

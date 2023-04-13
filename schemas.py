@@ -7,7 +7,7 @@ class BaseUser(BaseModel):
     name: str
 
 
-class UserInfo(BaseModel):
+class UserInfo(BaseUser):
     id: int
     stage_1: bool
     stage_2: bool

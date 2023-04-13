@@ -3,6 +3,7 @@ from sqlalchemy.sql import func
 
 from database import Base
 
+
 class Game(Base):
     __tablename__ = "games"
 

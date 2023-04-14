@@ -1,5 +1,4 @@
 from fastapi import Depends, FastAPI, HTTPException
-
 from sqlalchemy.orm import Session
 
 import crud
@@ -64,3 +63,13 @@ def update_game(game: schemas.GameEdit, db: Session = Depends(get_db)):
     if not updated_game:
         raise HTTPException(status_code=400, detail=f"The game was not updated, something went wrong")
     return updated_game
+
+
+@app.post("/add_the_game", response_model=schemas.Game, status_code=201)
+def create_game(game: schemas.Game, db: Session = Depends(get_db)):
+    db_game = crud.get_the_game(db)
+    if db_game:
+        raise HTTPException(status_code=400, detail="There is already one game")
+    new_game = crud.create_game(db, game)
+    crud.update_game_db_and_cache(db, game, new_game)
+    return new_game

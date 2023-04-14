@@ -28,7 +28,7 @@ class UserEdit(BaseModel):
 
 class Game(BaseModel):
     stage_number: int
-    despcription: str
+    description: str
     ending_date: date
 
     class Config:
@@ -37,7 +37,7 @@ class Game(BaseModel):
 
 class GameEdit(BaseModel):
     stage_number: int
-    despcription: Optional[str] = None
+    description: Optional[str] = None
     ending_date: Optional[date] = None
 
 
@@ -47,4 +47,3 @@ class MainResponse(BaseModel):
 
     class Config:
         orm_mode = True
-

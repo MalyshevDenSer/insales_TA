@@ -10,8 +10,7 @@ def get_game_guery(db):
     if redis_client.exists(key):
         result = pickle.loads(redis_client.get(key))
     else:
-        result = db.query(models.Game).filter().first().__dict__
-        result.pop('_sa_instance_state')
+        result = db.query(models.Game).filter().first()
         redis_client.set(key, pickle.dumps(result))
     return result
 

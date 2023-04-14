@@ -8,7 +8,7 @@ class Game(Base):
     __tablename__ = "games"
 
     stage_number = Column(Integer, index=True, primary_key=True)
-    despcription = Column(String, index=True)
+    description = Column(String, index=True)
     ending_date = Column(Date, server_default=func.current_date())
 
 

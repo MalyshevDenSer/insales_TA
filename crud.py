@@ -41,3 +41,10 @@ def update_game_db_and_cache(db: Session, game, db_game):
         db.commit()
         caching.update_cache(db)
     return db_game
+
+
+def create_game(db: Session, game):
+    db_game = models.Game(stage_number=game.stage_number, description=game.description, ending_date=game.ending_date)
+    db.add(db_game)
+    db.commit()
+    return db_game

@@ -50,7 +50,7 @@ Make sure you have installed all the following prerequisites on your development
 - Redis - [Download & Install Redis](https://redis.io/docs/getting-started/installation/). 
 - PostgreSQL - [Download & Install PostgreSQL](https://www.postgresql.org/download/).
 
-You can also use package management systems like [Homebrew](https://brew.sh/), API etc.
+You can also use package management systems like APT,[Homebrew](https://brew.sh/)  etc.
 
 For this project I used Python 3.7, Redis 7.0 and PostgreSQL 14.
 
@@ -64,7 +64,18 @@ sudo apt-get install python-psycopg2
 sudo apt-get install libpq-dev
 ```
 
-2) I assume that you have created a user for PostgreSQL and managed to connect it.
+2) You also need to install PIP. When installing Python via APT it is not included.
+ ```bash
+sudo apt install python3-pip
+```
+
+
+3) I assume that you have created a user for PostgreSQL and managed to connect it.
+
+
+++++++++++++++
+СДЕЛАТЬ ВРЕМЯ ПРОТУХАНИЯ ИЛИ НАПИСАТЬ ПРО ВРЕМЯ ПРОТУХАНИЯ
+
 
 ## Installation
 Make sure that PostgreSQl and Redis are running.
@@ -75,7 +86,13 @@ First of all, clone the repository:
 git clone https://github.com/MalyshevDenSer/insales_TA
 ```
 
-Secondly, create database using PostgreSQL on localhost with any name. For example:
+Secondly, you can create virtualenv or use main python interpreter to install required libraries:
+
+```bash
+pip3 install -r requirements.txt
+```
+
+Third, create database using PostgreSQL on localhost with any name. For example:
 
 ```bash
 insales
@@ -99,16 +116,19 @@ uvicorn server:app --reload --host 0.0.0.0:8000
 
 ## Documentation
 
+I used Redis in purpose to implement caching for Game model. 
+
 FastAPI autodocumentation you can find on ```http://127.0.0.1:8000/docs```
 Here is the simple version of it:
 
 ### URLs:
 
-
 1) ```/get_user_get_user_and_game_get``` - Getting user data by his ID and game(take from the cache)
 2) ```/get_game``` - Receiving data about the game (take from the cache).
 3) ```/add_user``` - Adding a new user. ID autogenerates.
 4) ```/edit_user``` - Change user data by user’s ID. Chaning ID is not supported.
+
+Game model cache updates if you work with ```/update_game``` or ```/add_the_game```:
 
 #### Additional URLs:
 

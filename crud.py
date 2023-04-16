@@ -29,7 +29,7 @@ def edit_user(db: Session, user, db_user):
 
 
 def get_the_game(db):
-    return caching.get_game_guery(db)
+    return caching.get_game_query(db)
 
 
 def update_game_db_and_cache(db: Session, game, db_game):

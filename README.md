@@ -73,10 +73,6 @@ sudo apt install python3-pip
 3) I assume that you have created a user for PostgreSQL and managed to connect it.
 
 
-++++++++++++++
-СДЕЛАТЬ ВРЕМЯ ПРОТУХАНИЯ ИЛИ НАПИСАТЬ ПРО ВРЕМЯ ПРОТУХАНИЯ
-
-
 ## Installation
 Make sure that PostgreSQl and Redis are running.
 
@@ -104,8 +100,10 @@ You can find there tips which will be helpful.
 ```bash
 # Use 1 for True and 0 for False
 SQL_ECHO=0
-# Fill in your details
-POSTGRES_DB_URL=postgresql://username:password@host:port/database
+# PostgreSQL authorization data
+POSTGRES_DB_URL=postgresql://localhost:5432/in_sales
+# Cache time to live in seconds
+CACHE_TIME_TO_LIVE=86400
 ```
 
 Finally, run the application in the project folder:
